@@ -20,19 +20,21 @@ Credit card fraud poses significant challenges to financial institutions, leadin
 
 ---
 
-## 📂 Project Structure
+<pre> 
+## 📂 Project Structure 
 
-project_4/
-├── CreditCardFraudDetection_jpynb1.ipynb # Jupyter Notebook with EDA and model development
-├── app.py # Dash application script
-├── creditcard.db # SQLite database containing transaction data
-├── creditcard_sample.csv # Sample dataset for quick testing
-├── final_model.pkl # Serialized trained model
-├── model_optimization_results.csv # Results from hyperparameter tuning
-├── requirements.txt # Python dependencies
-└── README.md # Project documentation
-
-
+``` 
+project_4/ 
+├── CreditCardFraudDetection_jpynb1.ipynb       # Jupyter Notebook with EDA and model development 
+├── app.py                                      # Dash application script 
+├── creditcard.db                               # SQLite database containing transaction data 
+├── creditcard_sample.csv                       # Sample dataset for quick testing 
+├── final_model.pkl                             # Serialized trained model 
+├── model_optimization_results.csv              # Results from hyperparameter tuning 
+├── requirements.txt                            # Python dependencies 
+└── README.md                                   # Project documentation 
+``` 
+</pre>
 ---
 
 ## 🚀 Getting Started
