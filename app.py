@@ -50,5 +50,5 @@ def update_output(n_clicks):
     return f"Prediction for Transaction #{tx_id}: {label}", fig
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=1000, debug=True)
 
