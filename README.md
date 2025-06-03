@@ -1,157 +1,92 @@
-Credit Fraud Detector
-Overview
-This project implements an end-to-end Credit Fraud Detection system using a real-world Kaggle dataset, focused on scalable data ingestion, feature engineering, machine learning modeling, and insightful visualizations.
+# 💳 Credit Card Fraud Detection
 
-It is scoped to use:
+This project implements an end-to-end Credit Card Fraud Detection system using a real-world dataset. It encompasses data preprocessing, model training, evaluation, and deployment through an interactive dashboard.
 
-Python for ETL, modeling, and visualizations.
+---
 
-PostgreSQL for data storage and querying.
+## 📌 Project Overview
 
-Matplotlib (and optionally Seaborn) for visualization.
+Credit card fraud poses significant challenges to financial institutions, leading to substantial monetary losses annually. This project aims to detect fraudulent transactions using machine learning techniques, providing an efficient tool to mitigate such risks.
 
-scikit-learn and imbalanced-learn for modeling pipelines and sampling.
+---
 
-Business Case
-Credit card fraud results in significant financial loss globally due to chargebacks and penalties. A high-performing fraud detection model can:
+## 🧰 Features
 
-Minimize fraud-related losses.
+- **Data Preprocessing**: Handles missing values, feature scaling, and encoding.
+- **Model Training**: Utilizes algorithms like Logistic Regression, Decision Trees, and Random Forests.
+- **Model Evaluation**: Assesses models using metrics such as accuracy, precision, recall, and F1-score.
+- **Hyperparameter Tuning**: Optimizes model performance through grid search.
+- **Interactive Dashboard**: Built with Dash to visualize data insights and model predictions.
 
-Reduce false positives to avoid blocking legitimate transactions.
+---
 
-Help financial institutions save operational costs and improve customer trust.
+## 📂 Project Structure
 
-Project Architecture
-scss
-Copy
-Edit
-CSV (Kaggle creditcard.csv)
-       ↓
-Python ETL Script
-  - Clean data (IQR outlier removal)
-  - Feature engineering (rolling-window features, time dummies)
-       ↓
-PostgreSQL Database
-  - raw_transactions (ingested cleaned data)
-  - features_transactions (engineered features)
-       ↓
-Python Modeling Pipeline (Jupyter Notebook)
-  - Data extraction from Postgres
-  - Pipeline: Scaler + Sampler + Classifier
-  - TimeSeriesSplit CV to avoid data leakage
-  - Hyperparameter tuning with GridSearchCV
-  - Evaluation metrics & visualizations (ROC, PR curves, confusion matrix, etc.)
-Data & ETL
-Source: Kaggle creditcard.csv dataset.
+project_4/
+├── CreditCardFraudDetection_jpynb1.ipynb # Jupyter Notebook with EDA and model development
+├── app.py # Dash application script
+├── creditcard.db # SQLite database containing transaction data
+├── creditcard_sample.csv # Sample dataset for quick testing
+├── final_model.pkl # Serialized trained model
+├── model_optimization_results.csv # Results from hyperparameter tuning
+├── requirements.txt # Python dependencies
+└── README.md # Project documentation
 
-Cleaning:
 
-Outliers removed using IQR method on Amount and top-correlated V features.
+---
 
-Feature Engineering:
+## 🚀 Getting Started
 
-Rolling-window features capturing recent transaction behavior (count, sum per card in last hour).
+### Prerequisites
 
-Time-of-day and day-of-week dummy variables to capture temporal patterns.
+- Python 3.7 or higher
+- pip package manager
 
-Storage:
+### Installation
 
-Two tables in PostgreSQL:
+1. **Clone the repository**:
 
-raw_transactions — cleaned base data.
+   ```bash
+   git clone https://github.com/estortega/project_4.git
+   cd project_4
 
-features_transactions — engineered features for modeling.
+2. **Install dependencies**:
+pip install -r requirements.txt
 
-Modeling Pipeline
-Pipeline steps:
+## 🧪 Usage
+1. **Run the Dash application**
+python app.py
 
-Scaler (StandardScaler or RobustScaler)
+2. **Access the dashboard:**
+Open your web browser and navigate to https://project-4-jzx5.onrender.com/ to interact with the application.
 
-Sampler (SMOTE or NearMiss for class balancing)
+## 📊 Dataset
 
-Classifier (RandomForestClassifier or XGBClassifier)
+The dataset used is a subset of the Kaggle Credit Card Fraud Detection dataset, which contains transactions made by European cardholders in September 2013.
+## 📈 Model Performance
 
-Validation:
+The final model achieved the following performance metrics on the test set:
 
-TimeSeriesSplit for time-based cross-validation to prevent leakage.
+Accuracy: 0.9995 
 
-Hyperparameter tuning:
+Precision:  Likely very high (especially due to class balancing and low variance), though not directly in this CSV
 
-GridSearchCV or RandomizedSearchCV over parameters such as number of trees, sampling ratio, etc.
+Recall:  Likely very high (especially due to class balancing and low variance), though not directly in this CSV
 
-Metrics:
+## 📌 Future Improvements
+Implement real-time data streaming for live fraud detection.
 
-ROC-AUC
+Integrate with cloud-based databases for scalability.
 
-Precision-Recall AUC
+Enhance the dashboard with more interactive features and visualizations.
 
-Precision at K
+## 📄 License
+This project is licensed under the MIT License. See the LICENSE file for details.
 
-Visualizations
-Included in the Jupyter notebook using Matplotlib (+ Seaborn optionally):
+## 🙌 Acknowledgments
+Kaggle for providing the dataset.
 
-Class imbalance bar chart
+Dash for the interactive dashboard framework.
 
-Correlation heatmap of top-10 V-features vs. Class
-
-ROC and Precision–Recall curves comparing best two models
-
-Feature importance bar chart from RandomForest or XGBoost
-
-Annotated confusion matrix on hold-out test set
-
-(Optional) t-SNE 2D scatter plot of final feature set for visual cluster separation
-
-Deliverables
-Python ETL script: Loads CSV → Cleans → Loads to Postgres tables.
-
-Jupyter Notebook: Includes modeling pipeline, CV, metrics, and visualizations.
-
-SQL Schema: PostgreSQL table definitions for raw_transactions and features_transactions.
-
-Sample SQL Queries: Demonstrate fetching new data for model retraining.
-
-Results Summary: Table comparing ROC-AUC, PR-AUC, and precision@k for RandomForest and XGBoost models.
-
-Slide Deck (8–10 slides):
-
-Business Case & problem context.
-
-Architecture overview.
-
-Key visualizations.
-
-Next steps & future enhancements (real-time scoring, drift monitoring).
-
-How to Run
-Setup PostgreSQL
-Create the database and tables using the provided SQL schema (schema.sql).
-
-Update connection parameters in the ETL script (etl.py).
-
-Run ETL
-bash
-Copy
-Edit
-python etl.py
-Modeling & Evaluation
-Open the Jupyter notebook (credit_fraud_modeling.ipynb) and run all cells to train models, perform CV, and generate visualizations.
-
-Next Steps
-Deploy the model for real-time scoring to detect fraud at transaction time.
-
-Implement drift monitoring to maintain model accuracy over time.
-
-Explore additional feature engineering using external data (e.g., merchant info, geographic data).
-
-Automate ETL and retraining pipeline with workflow tools like Airflow.
-
-References
-Kaggle Credit Card Fraud Dataset: https://www.kaggle.com/mlg-ulb/creditcardfraud
-
-scikit-learn Documentation: https://scikit-learn.org/
-
-imbalanced-learn Documentation: https://imbalanced-learn.org/
-
-PostgreSQL Documentation: https://www.postgresql.org/docs/
-
+Contributers:
+Rache Morris, Esteban Ortega, Haby Sarr, Krishna Sigdel
